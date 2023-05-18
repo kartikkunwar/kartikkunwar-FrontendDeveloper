@@ -52,10 +52,11 @@ userRouter.post("/signup",async(req,res)=>{
     }
 })
 
-rocketRouter.get("/",async()=>{
+rocketRouter.get("/",async(req,res)=>{
     try{
-        const u=await fetch("https://api.spacexdata.com/v3/launches?limit=1&offset=5")
-        res.send({"kartik":u})
+        const u=await fetch("https://api.spacexdata.com/v3/launches")
+        const hi=await u.json()
+        res.send({"kartik":hi})
     }
     catch(err){
         res.send({"msg":"invalid request"})

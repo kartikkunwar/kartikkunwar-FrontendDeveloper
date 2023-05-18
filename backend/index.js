@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 app.use("/user",userRouter)
 app.use("/launc",rocketRouter)
-app.use(authmiddleware)
+// app.use(authmiddleware)
 
 
 
