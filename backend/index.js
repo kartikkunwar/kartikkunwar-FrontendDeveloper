@@ -5,12 +5,15 @@ const app=express();
 
 const {connection}=require("./config/db")
 const {authmiddleware}=require("./middleware/authmiddleware");
+const {userRouter,rocketRouter}=require("./routes/userRoute")
 
 
 app.use(cors({
     origin:"*"
 }));
 app.use(express.json());
+app.use("/user",userRouter)
+app.use("/launc",rocketRouter)
 app.use(authmiddleware)
 
 

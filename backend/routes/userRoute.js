@@ -1,10 +1,12 @@
 const express=require("express");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const {Logmodel}=require("../model/login")
 
 const userRouter=express.Router();
+const rocketRouter=express.Router();
 
 userRouter.post("/signup",async(req,res)=>{
     const {email,password}=req.body;
@@ -49,3 +51,16 @@ userRouter.post("/signup",async(req,res)=>{
         console.log(err)
     }
 })
+
+rocketRouter.get("/",async()=>{
+    try{
+        const u=await fetch("https://api.spacexdata.com/v3/launches?limit=1&offset=5")
+        res.send({"kartik":u})
+    }
+    catch(err){
+        res.send({"msg":"invalid request"})
+        console.log(err)
+    }
+})
+
+module.exports={userRouter,rocketRouter}
